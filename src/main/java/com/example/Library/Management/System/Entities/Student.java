@@ -1,10 +1,7 @@
 package com.example.Library.Management.System.Entities;
 
 import jakarta.annotation.Nullable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,9 +16,10 @@ import lombok.Setter;
 public class Student {
 
     @Id
-    private String studentId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer studentId;
 
-    private String Name;
+    private String name;
 
     private Integer age;
 
@@ -29,4 +27,8 @@ public class Student {
     private String contact;
 
     private String emailId;
+
+//
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
+    private LibraryCard libraryCard;
 }

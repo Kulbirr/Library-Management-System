@@ -16,6 +16,7 @@ import lombok.Setter;
 public class Book {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bookId;
 
     private String bookName;
@@ -28,4 +29,10 @@ public class Book {
     private Genre genre;
 
     private double rating;
+
+    private boolean isAvailable;
+
+    @ManyToOne
+    @JoinColumn
+    private Author author;
 }

@@ -1,15 +1,25 @@
 package com.example.Library.Management.System.Entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "author_table")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Author {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer authorId;
 
     private String authorName;
@@ -17,4 +27,7 @@ public class Author {
     private int age;
 
     private double rating;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Book> books = new ArrayList<>();
 }

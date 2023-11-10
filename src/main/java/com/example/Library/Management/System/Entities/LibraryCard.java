@@ -7,18 +7,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity //this means its a structure that will be reflected in database
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-@Entity
 @Table(name = "library_Card")
 public class LibraryCard {
 
     @Id
-    private String cardNo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer cardNo;
 
     @Enumerated(value = EnumType.STRING)
     private CardStatus cardStatus;
+
+    private String nameOnCard;
+
+    @OneToOne
+    @JoinColumn
+    private Student student;
 }
+
