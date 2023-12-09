@@ -1,11 +1,15 @@
 package com.example.Library.Management.System.Entities;
 
 import com.example.Library.Management.System.Enum.CardStatus;
+import com.example.Library.Management.System.Enum.TransactionStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity //this means its a structure that will be reflected in database
 @Getter
@@ -27,5 +31,11 @@ public class LibraryCard {
     @OneToOne
     @JoinColumn
     private Student student;
+
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
+    List<Transactions> transactionsList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "card",cascade = CascadeType.ALL)
+    private List<Book> booksIssued;
 }
 

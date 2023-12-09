@@ -15,4 +15,33 @@ public class StudentService {
         studentRepository.save(student);
         return "Student has been added Successfully!";
     }
+
+    public String findNameByEmail(String email){
+
+        Student student=studentRepository.findByEmail(email);
+        return student.getName();
+    }
+
+
+    public String updateMobileNo(Integer studentId, String newContact){
+
+        Student student=studentRepository.findById(studentId).get();
+
+        student.setContact(newContact);
+
+        studentRepository.save(student);
+
+        return "Contact updated successfully";
+    }
+
+    public String updateAge(Integer studentId, int newAge){
+
+        Student student=studentRepository.findById(studentId).get();
+
+        student.setAge(newAge);
+
+        studentRepository.save(student);
+
+        return "Age updated successfully";
+    }
 }

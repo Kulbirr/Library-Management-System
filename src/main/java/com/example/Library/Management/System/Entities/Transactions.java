@@ -1,15 +1,15 @@
 package com.example.Library.Management.System.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.Library.Management.System.Enum.TransactionStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -20,12 +20,24 @@ public class Transactions {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int transactionId;
+    private int Id;
 
-    private Date issueDate;
+    @Enumerated(value = EnumType.STRING)
+    private TransactionStatus transactionStatus;
 
     private int fine;
 
-    private Date returnDate;
+    private String transactionId = UUID.randomUUID().toString();
 
+    @CreationTimestamp
+    private Date transactionDate;
+    private boolean isIssueOperation;
+
+    @ManyToOne
+    @JoinColumn
+    private LibraryCard card;
+
+    @ManyToOne
+    @JoinColumn
+    private Book book;
 }
